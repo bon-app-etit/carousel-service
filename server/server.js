@@ -40,18 +40,26 @@ app.get('/reservations', function(req, res) {
         })
 })
 
-app.get('/images', function(req, res) {
-    for(var id = 198002; id < 199002; id++){
+app.get('/images/restaurants/:restaurantID', function(req, res) {
+        const id = req.params.restaurantID;
         axios.get(`http://localhost:3004/images/restaurants/${id}`)
             .then((response) => {
-                res.end(JSON.stringify(response.data))
+                res.send(response.data)
         })
             .catch((err) => {
-            res.end(err);
+            res.send(err);
         })
-    }}
-);
+});
 
+app.post('/images', function(req,res){
+    axios.post(`http://localhost://3004/images`, req.body)
+        .then((response)=> {
+            res.send(response.data)
+        })
+        .catch((err)=> {
+            res.send(err);
+        })
+})
 
 app.get('/popular-dishes-bundle.js', function(req, res) {
     axios.get('https://popular-dishes.s3-us-west-1.amazonaws.com/remi/bundle.js')

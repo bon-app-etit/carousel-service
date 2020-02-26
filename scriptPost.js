@@ -8,7 +8,7 @@ export let options = {
 };
 
 export default function() {
-  var url = 'http://localhost:3004/images';
+  var url = 'http://localhost:3000/images';
   var payload = JSON.stringify({
     imageURL: 'http://lorempixel.com/640/480/people',
     password: 'Thu Feb 06 2020 01:02:59 GMT-0800(Pacific Standard Time)',
