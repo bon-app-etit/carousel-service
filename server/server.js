@@ -1,3 +1,4 @@
+require('newrelic');
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
@@ -40,14 +41,17 @@ app.get('/reservations', function(req, res) {
 })
 
 app.get('/images', function(req, res) {
-    axios.get('http://localhost:3003/images')
-        .then((response) => {
-            res.end(JSON.stringify(response.data))
+    for(var id = 198002; id < 199002; id++){
+        axios.get(`http://localhost:3004/images/restaurants/${id}`)
+            .then((response) => {
+                res.end(JSON.stringify(response.data))
         })
-        .catch((err) => {
+            .catch((err) => {
             res.end(err);
         })
-})
+    }}
+);
+
 
 app.get('/popular-dishes-bundle.js', function(req, res) {
     axios.get('https://popular-dishes.s3-us-west-1.amazonaws.com/remi/bundle.js')
